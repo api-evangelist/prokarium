@@ -1,0 +1,44 @@
+generated: '2026-08-26'
+method: probed
+source: https://www.prokarium.com/.well-known/
+note: >-
+  Every /.well-known/ path probed on the only host Prokarium operates returned a genuine
+  HTTP 404 with a 10-byte "Not found" plain body — not a soft-200 SPA catch-all, so these
+  are true absences rather than an ambiguous host. Prokarium is a clinical-stage
+  biopharmaceutical company with no API, no developer program and no identity provider,
+  so no /.well-known/ discovery surface is expected. NO WellKnown or SecurityTxt pointer
+  is emitted in apis.yml: this file records a measured absence, and a pointer would assert
+  the provider serves a surface it does not.
+hit_count: 0
+hosts:
+- host: https://www.prokarium.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+soft_404_control:
+  path: /.well-known/api-catalog
+  status: 404
+  bytes: 10
+  body: 'Not found'
+  verdict: >-
+    Host returns a real 404 status with a short plain-text body for unknown /.well-known/
+    paths, so no catch-all 200 inflation is possible on this host.
